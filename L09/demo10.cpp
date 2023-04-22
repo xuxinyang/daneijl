@@ -1,33 +1,61 @@
 #include <cstdio>
 #include <iostream>
 using namespace std;
+const int maxn = 105;
 int n;
-char ch[205];
-void swap(char &a, char &b)
+char s[maxn * 2 + 5];
+int empty_idx;
+
+void print()
 {
-    char t = a;
-    a = b;
-    b = t;
+    for (int i = 1; i <= 2 * n + 2; i++)
+        cout << s[i];
+    cout << endl;
+    return;
 }
-void movechess(int start, int end)
+
+void init()
 {
-    swap(ch[start], ch[end]);
-    swap(ch[start + 1], ch[end + 1]);
+    for (int i = 1; i <= n; i++)
+        s[i] = 'o';
+    for (int i = n + 1; i <= 2 * n; i++)
+        s[i] = '*';
+    for (int i = 2 * n + 1; i <= 2 * n + 2; i++)
+        s[i] = '-';
+    empty_idx = 2 * n + 1;
+    // print();
+    return;
 }
+
+void move(int x)
+{
+    s[empty_idx] = s[x];
+    s[empty_idx + 1] = s[x + 1];
+    cout << x << "," << x + 1 << "-->" << empty_idx << "," << empty_idx + 1 << "\n";
+    s[x] = s[x + 1] = '-';
+    empty_idx = x;
+    // print();
+}
+
+
+void solve(int k)
+{
+    if (k == 4)
+    {
+        move(4); move(8); move(2); move(7); move(1);
+    }
+    else
+    {
+        move(k); 
+        move(2 * k - 1);
+        solve(k - 1);
+    }
+}
+
 int main()
 {
-    scanf("%d", &n);
-    int len = n;
-    while (true)
-    {
-        cout << len-1 << "," << len << "-->" << 2*len-1 << "," << 2*len << "\n";
-        movechess(len - 1, 2 * len);
-        len--;
-        cout << len-1 << "," << len << "-->" << 2*len-1 << "," << 2*len << "\n";
-        if (len == 3)
-            break;
-        movechess(len, 2 * len);
-        cout << len-1 << "," << len << "-->" << 2*len-1 << "," << 2*len << "\n";
-    }
+    cin >> n;
+    init();
+    solve(n);
     return 0;
 }
