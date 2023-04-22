@@ -11,7 +11,7 @@ int main()
     {
         while (k <= a[i] && (st.empty() || st.top() != a[i]))
         {
-            st.push(k); k += 2;
+            st.push(k); k++;
         }
         if (st.empty() || st.top() != a[i])
         {
