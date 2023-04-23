@@ -6,14 +6,6 @@ int n;
 char s[maxn * 2 + 5];
 int empty_idx;
 
-void print()
-{
-    for (int i = 1; i <= 2 * n + 2; i++)
-        cout << s[i];
-    cout << endl;
-    return;
-}
-
 void init()
 {
     for (int i = 1; i <= n; i++)
@@ -23,7 +15,6 @@ void init()
     for (int i = 2 * n + 1; i <= 2 * n + 2; i++)
         s[i] = '-';
     empty_idx = 2 * n + 1;
-    // print();
     return;
 }
 
@@ -34,9 +25,7 @@ void move(int x)
     cout << x << "," << x + 1 << "-->" << empty_idx << "," << empty_idx + 1 << "\n";
     s[x] = s[x + 1] = '-';
     empty_idx = x;
-    // print();
 }
-
 
 void solve(int k)
 {

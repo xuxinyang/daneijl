@@ -36,7 +36,7 @@ int main() {
     } 
     quickSort(arr, 0, arr.size() - 1);
     for (int i = arr.size()-1; i >= 0; i--) {
-        cout << arr[i] << " ";
+        if (arr[i] >= 3) cout << arr[i] << " ";
     }
     return 0;
 }
